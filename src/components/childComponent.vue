@@ -1,5 +1,8 @@
 <template>
-  <div>This is a child component!</div>
+  <div id="app">
+  	<div>This is a child component!</div>
+  </div>		
+  
 </template>
  
 <script>
