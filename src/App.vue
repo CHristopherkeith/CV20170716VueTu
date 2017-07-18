@@ -2,7 +2,7 @@
   <div>
     <div id="app">
       <hello></hello>
-      <my-component></my-component>
+      <my-component v-bind:my-name="name" v-bind:my-age="age"></my-component>
       <parentComponent></parentComponent>
     </div>
     ------------------------------
@@ -18,10 +18,11 @@
 </template>
 
 <script>
+import Vue from 'vue'
 import Hello from './components/Hello.vue'
 import myComponent from './components/myComponent.vue'
-import parentComponent from './components/parentComponent.vue'
-console.log(parentComponent)
+import parentComponent from './components/parentPropsComponent.vue'
+// console.log(parentComponent)
 // import scriptComponent1 from './components/script.js'
 // console.log(scriptComponent1)
 export default {
@@ -31,12 +32,13 @@ export default {
     myComponent,
     parentComponent/*,
     scriptComponent*/
-  }/*,
+  },
   data () {
     return {
-      scriptComponent: scriptComponent1
+      name: 'cl',
+      age: 27
     }
-  }*/
+  }
 }
 </script>
 
