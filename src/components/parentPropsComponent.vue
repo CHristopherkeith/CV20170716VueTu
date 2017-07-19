@@ -14,9 +14,14 @@
 			<td>{{ age }}</td>
 			<td><input type="text" v-model="age" /></td>
 		</tr>
+		
 	</table>
-
+<!-- 单向绑定 -->
 <child-Component v-bind:my-name="name" v-bind:my-age="age"></child-Component>
+<!-- 双向绑定 -->
+<!-- <child-Component v-bind:my-name.sync="name" v-bind:my-age.sync="age"></child-Component> -->
+<!-- 单次绑定 -->
+<!-- <child-Component v-bind:my-name.once="name" v-bind:my-age.once="age"></child-Component> -->
  </div>
 </template>
  
