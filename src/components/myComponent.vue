@@ -1,5 +1,5 @@
 <template>
-<!-- <div id="myComponent"> -->
+<div id="myComponent">
 	<table>
 		<tr>
 			<th colspan="2">
@@ -15,7 +15,8 @@
 			<td>{{myAge}}</td>
 		</tr>
 	</table>
-<!-- </div> -->
+	<slot>如果没有分发内容，则显示slot中的内容</slot>
+</div>
 </template>
  
 <script>

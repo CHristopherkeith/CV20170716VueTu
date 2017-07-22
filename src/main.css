@@ -22,7 +22,8 @@ th {
 }
 
 table {
-	width: 100%
+	width: 100%;
+	margin: 20px;
 }
 
 td,
@@ -80,76 +81,36 @@ button:hover{
 
 #app {
 	margin: 0 auto;
-	max-width: 640px
+	max-width: 480px;
 }
 
-.form-group {
+
+#searchBar{
 	margin: 10px;
+	padding-left: 20px;
 }
 
-.form-group > label {
+#searchBar input[type=text]{
+	width: 80%;
+}
+
+.arrow {
 	display: inline-block;
-	width: 10rem;
-	text-align: right;
+	vertical-align: middle;
+	width: 0;
+	height: 0;
+	margin-left: 5px;
+	opacity: 0.66;
 }
 
-.form-group > input,
-.form-group > select {
-	display: inline-block;
-	height: 2.5rem;
-	line-height: 2.5rem;
+.arrow.asc {
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-bottom: 4px solid #fff;
 }
 
-.text-center{
-	text-align: center;
-}
-
-.pagination {
-	display: inline-block;
-	padding-left: 0;
-	margin: 21px 0;
-	border-radius: 3px;
-}
-
-.pagination > li {
-	display: inline;
-}
-
-.pagination > li > a {
-	position: relative;
-	float: left;
-	padding: 6px 12px;
-	line-height: 1.5;
-	text-decoration: none;
-	color: #009a61;
-	background-color: #fff;
-	border: 1px solid #ddd;
-	margin-left: -1px;
-	list-style: none;
-}
-
-.pagination > li > a:hover {
-	background-color: #eee;
-}
-
-.pagination .active {
-	color: #fff;
-	background-color: #009a61;
-	border-left: none;
-	border-right: none;
-}
-
-.pagination .active:hover {
-	background: #009a61;
-	cursor: default;
-}
-
-.pagination > li:first-child > a .p {
-	border-bottom-left-radius: 3px;
-	border-top-left-radius: 3px;
-}
-
-.pagination > li:last-child > a {
-	border-bottom-right-radius: 3px;
-	border-top-right-radius: 3px;
+.arrow.dsc {
+	border-left: 4px solid transparent;
+	border-right: 4px solid transparent;
+	border-top: 4px solid #fff;
 }

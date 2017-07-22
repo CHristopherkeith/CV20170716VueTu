@@ -16,7 +16,14 @@
 		<!-- 双向绑定手动显式触发更新事件按钮 -->
 		<!-- <tr><button v-on:click="emit()"></button></tr> -->
 		<!-- 单次绑定事件 -->
-		<tr><button v-on:click.once="once()"></button></tr>
+		<tr>
+			<td>
+				<button v-on:click.once="once()">click</button>
+			</td>
+			<td>
+				<button v-on:click="showParentComponentData">显示父组件的数据</button>
+			</td>
+		</tr>
 	</table>
 </template>
  
@@ -34,8 +41,14 @@ export default {
 	 	// 单次绑定事件
  		once: function(){
   			alert('once')
-	 	}
+	 	},
+	 	msg: 'child'
   	}
+  },
+  methods: {
+	showParentComponentData: function() {
+		alert(this.$parent.age)
+	}
   }
 }
 </script>
