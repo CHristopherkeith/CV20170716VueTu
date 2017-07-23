@@ -1,6 +1,10 @@
 <template>
   <div>
     <div id="app">
+    ---------------buttonCounter---------------
+    <p>{{ total }}</p>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
+    <button-counter v-on:increment="incrementTotal"></button-counter>
     ---------------table---------------
       <div id="searchBar">
         Search <input type="text" v-model="searchQuery" />
@@ -26,14 +30,15 @@
 <script>
 import Vue from 'vue'
 import filters from './components/filter.js'
-console.log(filters)
 import Hello from './components/Hello.vue'
+import buttonCounter from './components/buttonCounter.vue'
 import myComponent from './components/myComponent.vue'
 import parentComponent from './components/parentPropsComponent.vue'
 import simpleGrid from './components/simpleGrid.vue'
 export default {
   name: 'app',
   components: {
+    buttonCounter,
     simpleGrid,
     Hello,
     myComponent,
@@ -42,6 +47,7 @@ export default {
   },
   data () {
     return {
+      total: 0,
       name: 'cl',
       age: 27,
       searchQuery: '',
@@ -63,6 +69,11 @@ export default {
         age: 36,
         sex: 'Male'
       }]
+    }
+  },
+  methods: {
+    incrementTotal: function () {
+      this.total += 1
     }
   }
 }
