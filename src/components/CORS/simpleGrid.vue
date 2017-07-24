@@ -34,7 +34,8 @@
 <script>
 import modalDialog from './dialogComponent.vue'
 import AjaxHelper from '../AjaxHelper.js'
-console.log(new AjaxHelper())
+// console.log(new AjaxHelper())
+var ajaxHelper = new AjaxHelper()
 export default {
   name: 'simpleGrid',
   data: function() {
@@ -50,7 +51,7 @@ export default {
     modalDialog,
     AjaxHelper
   },
-  props: ['dataList', 'columns', 'searchKey'],
+  props: ['dataList', 'columns', 'searchKey', 'apiUrl'],
   filters: {
 
   },
@@ -129,18 +130,23 @@ export default {
 			return false;
 		},
 		createItem: function() {
-			var keyColumn = this.keyColumn
-			if (!this.itemExists()) {
-				// 将item追加到dataList
-				this.dataList.push(this.item)
-				// 广播事件，传入参数false表示隐藏对话框
-				// this.$broadcast('showDialog', false)
-				this.show = false
-				// 新建完数据后，重置item对象
-				this.item = {}
-			} else {
-				alert(keyColumn + ' "' + this.item[keyColumn] + '" is already exists')
-			}
+			var vm = this,
+                callback = function(data) {
+                    // vm.$set('item', {})
+                    vm.item = {}
+                    // vm.getCustomers()
+                    vm.$emit('refresh-item')
+                },
+                errorCallback = function(xhr, errorType, error){
+	              // alert('user defined')
+	              vm.$emit('refresh-item')
+	              console.log('Ajax request error, errorType: ' + errorType +  ', error: ' + error)
+	            }
+                // 将vm.item直接POST到服务端
+            // console.log(vm.item)
+            // console.log(vm.apiUrl)
+            ajaxHelper.post(vm.apiUrl, vm.item, callback,errorCallback)
+            this.show = false
 
 		},
 		updateItem: function() {
