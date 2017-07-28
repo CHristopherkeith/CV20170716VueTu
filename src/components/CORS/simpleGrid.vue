@@ -133,7 +133,7 @@ export default {
 			var vm = this,
                 callback = function(data) {
                     // vm.$set('item', {})
-                    vm.item = {}
+                    vm.item = {};
                     // vm.getCustomers()
                     vm.$emit('refresh-item')
                 },
@@ -150,24 +150,22 @@ export default {
 
 		},
 		updateItem: function() {
-
-			// 获取主键列
-			var keyColumn = this.keyColumn
-
-			for (var i = 0; i < this.dataList.length; i++) {
-				// 根据主键查找要修改的数据，然后将this.item数据更新到this.dataList[i]
-				if (this.dataList[i][keyColumn] === this.item[keyColumn]) {
-					for (var j in this.item) {
-						this.dataList[i][j] = this.item[j]
-					}
-					break;
-				}
-			}
-			// 广播事件，传入参数false表示隐藏对话框
-			// this.$broadcast('showDialog', false)
-			this.show = false
-			// 修改完数据后，重置item对象
-			this.item = {}
+			var vm = this,
+                callback = function(data) {
+                    // vm.$set('item', {})
+                    vm.item = {};
+                    vm.$emit('refresh-item')
+                },
+                errorCallback = function(xhr, errorType, error){
+	              // alert('user defined')
+	              vm.$emit('refresh-item')
+	              console.log('Ajax request error, errorType: ' + errorType +  ', error: ' + error)
+	            }
+                // 将vm.item直接POST到服务端
+            // console.log(vm.item)
+            // console.log(vm.apiUrl)
+            ajaxHelper.put(vm.apiUrl + '/' + vm.item.customerId, vm.item, callback,errorCallback)
+            this.show = false
 		},
 		deleteItem: function(entry) {
 			var data = this.dataList
