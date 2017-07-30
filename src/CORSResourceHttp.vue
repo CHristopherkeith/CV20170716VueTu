@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+      <div id="help">
+        <loading v-show="showLoading"></loading>
+      </div>
       <!-- search -->
       <div class="container">
         <div class="form-group">
@@ -20,25 +23,20 @@
 <script>
 import Vue from 'vue'
 import VueResource from 'vue-resource'
+Vue.use(VueResource);
 import filters from './components/filter.js'
 // import AjaxHelper from './components/AjaxHelper.js'
 import simpleGrid from './components/CORSResourceHttp/simpleGrid.vue'
-Vue.use(VueResource);
-// simpleGrid.$watch('show', function(newVal, oldVal){
-//     if(!newVal){
-//         // this.item = {}
-//         console.log('22')
-//     }
-// })
-// console.log(resource)
-// var ajaxHelper = new AjaxHelper()
+import loading from './components/loadingComponent.vue'
 export default {
   name: 'app',
   components: {
-    simpleGrid
+    simpleGrid,
+    loading
   },
   data () {
     return {
+      showLoading: false,
       searchQuery: '',
       columns: [{
         name: 'customerId',
@@ -56,7 +54,16 @@ export default {
   },
   methods: {
     getCustomers: function() {
-      this.$http./*get*/jsonp(this.apiUrl)
+      
+      Vue.http.interceptors.push((request, next) => {
+        this.showLoading = true
+        next((response) => {
+          this.showLoading = false
+          return response
+        });
+      });
+
+      this.$http.get(this.apiUrl)
           .then((response) => {
               this.people = response.data;
           })

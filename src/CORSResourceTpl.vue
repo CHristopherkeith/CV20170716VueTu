@@ -1,5 +1,8 @@
 <template>
     <div id="app">
+      <div id="help">
+        <loading v-show="showLoading"></loading>
+      </div>
       <!-- search -->
       <div class="container">
         <div class="form-group">
@@ -22,14 +25,17 @@ import Vue from 'vue'
 import VueResource from 'vue-resource'
 import filters from './components/filter.js'
 import simpleGrid from './components/CORSResourceTpl/simpleGrid.vue'
+import loading from './components/loadingComponent.vue'
 Vue.use(VueResource);
 export default {
   name: 'app',
   components: {
-    simpleGrid
+    simpleGrid,
+    loading
   },
   data () {
     return {
+      showLoading: false,
       searchQuery: '',
       columns: [{
         name: 'customerId',
@@ -46,16 +52,14 @@ export default {
     }
   },
   methods: {
-    // getCustomers: function() {
-    //   this.$http.get(this.apiUrl)
-    //       .then((response) => {
-    //           this.people = response.data;
-    //       })
-    //       .catch(function(response) {
-    //           console.log(response)
-    //       })
-    // },
     getCustomers: function() {
+      Vue.http.interceptors.push((request, next) => {
+          this.showLoading = true;
+          next((response) => {
+              this.showLoading = false;
+              return response
+          });
+      });
       var resource = this.$resource(this.apiUrl),vm = this;
       resource.get().then((response) => {
           // vm.$set('gridData', response.data)
