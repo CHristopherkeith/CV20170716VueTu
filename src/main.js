@@ -12,8 +12,3 @@ var App = new Vue({
   el: '#app',
   render: h => h(CORS)
 })
-// console.log(App);
-// new Vue({
-//   el: '#app',
-//   render: h => h(Dialog)
-// })

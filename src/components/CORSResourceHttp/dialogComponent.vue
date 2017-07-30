@@ -52,20 +52,11 @@ export default {
 	},
 	save: function() {
 		if (this.mode === 1) {
-			// 使用$dispatch调用simple-grid的create-item事件
-			// this.$dispatch('create-item')
 			this.$emit('create-item')
 		} else if (this.mode === 2) {
-			// 使用$dispatch调用simple-grid的update-item事件
-			// this.$dispatch('update-item')
 			this.$emit('update-item')
 		}
 	}
-  }/*,
-  events: {
-	'showDialog': function(show) {
-		this.show = show
-	}
-  }*/
+  }
 }
 </script>
