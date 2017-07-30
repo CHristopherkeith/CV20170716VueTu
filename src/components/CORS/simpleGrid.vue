@@ -59,9 +59,11 @@ export default {
 	  	search: function(value){
 	  	  var searchKey = this.searchKey.toString();
 	  	  for(var key in value){
-	  	  	if (value[key].toString().indexOf(searchKey) !== -1){
-	  	  		return true;
+	  	  	// console.log(value[key])
+	  	  	if(value[key] !== null&&value[key].toString().indexOf(searchKey) !== -1){
+		  	  		return true;
 	  	  	}
+	  	  	
 	  	  }
 	      return false;
 	  	},
@@ -71,7 +73,7 @@ export default {
 			// mode = 1表示新建模式
 			this.mode = 1
 			// 初始化this.item
-			this.item = {}
+			// this.item = {}
 			// 广播事件，showDialog是modal-dialog组件的一个方法，传入参数true表示显示对话框
 			// this.$broadcast('showDialog', true)
 			this.show = true
@@ -133,7 +135,7 @@ export default {
 			var vm = this,
                 callback = function(data) {
                     // vm.$set('item', {})
-                    vm.item = {};
+                    // vm.item = {};
                     // vm.getCustomers()
                     vm.$emit('refresh-item')
                 },
@@ -153,7 +155,7 @@ export default {
 			var vm = this,
                 callback = function(data) {
                     // vm.$set('item', {})
-                    vm.item = {};
+                    // vm.item = {};
                     vm.$emit('refresh-item')
                 },
                 errorCallback = function(xhr, errorType, error){
@@ -168,13 +170,18 @@ export default {
             this.show = false
 		},
 		deleteItem: function(entry) {
-			var data = this.dataList
-			data.forEach(function(item, i) {
-				if(item === entry) {
-					data.splice(i, 1)
-					return
-				}
-			})
+			var vm = this,
+			callback = function() {
+                // vm.$set('item', {})
+                // vm.item = {};
+                vm.$emit('refresh-item')
+            },
+            errorCallback = function(xhr, errorType, error){
+              // alert('user defined')
+              vm.$emit('refresh-item')
+              console.log('Ajax request error, errorType: ' + errorType +  ', error: ' + error)
+            };
+            ajaxHelper.delete(vm.apiUrl + '/' + entry.customerId, null, callback,errorCallback)
 		}
   },
   created: function(){
@@ -186,5 +193,12 @@ export default {
 		}
 	}
   },
+  watch: {
+  	show: function(newVal, oldVal){
+	    if(!newVal){
+	        this.item = {}
+	    }
+	}
+  }
 }
 </script>

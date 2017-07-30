@@ -18,11 +18,16 @@
 </template>
 
 <script>
-import Vue from 'vue'
-// import JQuery from './components/jquery-2.2.2.min.js'
+// import Vue from 'vue'
 import filters from './components/filter.js'
 import AjaxHelper from './components/AjaxHelper.js'
 import simpleGrid from './components/CORS/simpleGrid.vue'
+// simpleGrid.$watch('show', function(newVal, oldVal){
+//     if(!newVal){
+//         // this.item = {}
+//         console.log('22')
+//     }
+// })
 var ajaxHelper = new AjaxHelper()
 export default {
   name: 'app',
@@ -51,23 +56,6 @@ export default {
       },{
         name: 'phone'
       }],
-      // people: [{
-      //   name: 'Jack',
-      //   age: 30,
-      //   sex: 'Male'
-      // }, {
-      //   name: 'Bill',
-      //   age: 26,
-      //   sex: 'Male'
-      // }, {
-      //   name: 'Tracy',
-      //   age: 22,
-      //   sex: 'Female'
-      // }, {
-      //   name: 'Chris',
-      //   age: 36,
-      //   sex: 'Male'
-      // }]
       people: [],
       apiUrl: 'http://211.149.193.19:8080/api/customers'
     }
@@ -79,7 +67,7 @@ export default {
                 // console.log(data)
                 // console.log(vm.columns)
                 // vm.$set(vm.people,0,data[0])
-                vm.people = data
+                vm.people = data;
                 // console.log(vm.people)
             }
             // errorCallback = function(xhr, errorType, error){
@@ -96,7 +84,7 @@ export default {
   },
   created: function() {
       this.getCustomers()
-  },
+  }
 }
 </script>
 

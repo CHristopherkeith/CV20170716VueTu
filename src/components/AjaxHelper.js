@@ -1,7 +1,7 @@
 // import $ from './jquery-2.2.2.min.js'
 
 import {zepto} from './zepto.js'
-console.log(zepto)
+// console.log(zepto)
 function AjaxHelper() {
     this.ajax = function(url, type, dataType, data, callback,errorCallback) {
     	// console.log($)
