@@ -3,12 +3,13 @@ import Vue from 'vue'
 // import App from './App.vue'
 // import Dialog from './Dialog.vue'
 // import AdminPage from './AdminPage.vue'
-import CORS from './CORSResourceHttp.vue'
-import './adminPage.css'
+import Router from './router/scrollRouter.vue'
+// import {router} from './basicRouter.vue'
+import './css/adminPage.css'
 // import '../iconfont.css'
 // import './dialog.css'
 // Vue.use(VueResource);
 var App = new Vue({
   el: '#app',
-  render: h => h(CORS)
+  render: h => h(Router)
 })
