@@ -301,6 +301,9 @@ template {
 	-webkit-animation-delay: -0.16s;
 	animation-delay: -0.16s;
 }
+.activeClass{
+	color: green;
+}
 
 @-webkit-keyframes sk-three-bounce {
 	0%,

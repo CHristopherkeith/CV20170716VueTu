@@ -61,6 +61,7 @@ const router = new VueRouter({
   mode: 'history',
   base: __dirname,
   scrollBehavior,
+  linkActiveClass: 'activeClass',
   routes: [
     { path: '/', component: Home, meta: { scrollToTop: true }},
     { path: '/foo', component: Foo },
